@@ -169,6 +169,15 @@
   footer{border-top:1px solid var(--line);padding:44px 0;text-align:center}
   footer .q{font-family:'Playfair Display';font-size:22px;color:var(--gold2)}
   footer .a{color:var(--muted);font-size:13px;margin-top:8px}
+  .notes-wrap{margin-top:18px}
+.notes-wrap textarea{width:100%;min-height:160px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:10px;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;padding:14px;resize:vertical}
+.notes-wrap textarea:focus{outline:none;border-color:var(--gold)}
+.notes-actions{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.notes-actions button, .notes-actions label{cursor:pointer;font-size:13px;font-weight:700;
+  background:var(--panel);border:1px solid var(--line);color:var(--cream);border-radius:9px;padding:8px 14px}
+.notes-actions button:hover, .notes-actions label:hover{border-color:var(--gold)}
+.notes-saved{font-size:12px;color:var(--muted);align-self:center}
 </style>
 </head>
 <body>
@@ -179,6 +188,7 @@
   <nav>
     <a href="#week">Week</a><a href="#openings">Opening Lab</a><a href="#library">Library</a>
     <a href="#roadmap">Roadmap</a><a href="#rules">Rules</a><a href="#links">Arsenal</a>
+    <a href="#journal">Journal</a>
   </nav>
   <span class="spacer"></span>
   <div class="mini">
@@ -338,6 +348,23 @@
       </div>
     </div>
   </section>
+  <section id="journal">
+  <div class="sec-head"><div class="num">— THE JOURNAL</div>
+    <h2>Notes & Blunder Log</h2>
+    <p>Freeform space for blunders, takeaways, opening ideas — whatever the day calls for.
+       Saves automatically in this browser. Use <b>Export</b> to back up to a file.</p>
+  </div>
+  <div class="notes-wrap">
+    <textarea id="journalText" placeholder="Write here... e.g. 'Mon: hung a knight to a fork on move 14, missed Re8 check. Wed: tried QGD as Black, felt comfortable.'"></textarea>
+    <div class="notes-actions">
+      <button id="exportBtn">⬇ Export backup (.json)</button>
+      <label for="importFile">⬆ Import backup
+        <input type="file" id="importFile" accept="application/json" style="display:none">
+      </label>
+      <span class="notes-saved" id="savedMsg"></span>
+    </div>
+  </div>
+</section>
 
   <!-- ════ 02 OPENING LAB ════ -->
   <section id="openings">
@@ -565,6 +592,51 @@
     document.getElementById('pfill').style.width=(done.length/boxes.length*100)+'%';
     document.getElementById('ptext').textContent=`${done.length} / ${boxes.length}`;
   }
+  /* ── journal notes ── */
+const journal = document.getElementById('journalText');
+const savedMsg = document.getElementById('savedMsg');
+journal.value = localStorage.getItem('gmJournal') || '';
+let journalTimeout;
+journal.addEventListener('input', () => {
+  clearTimeout(journalTimeout);
+  savedMsg.textContent = '';
+  journalTimeout = setTimeout(() => {
+    localStorage.setItem('gmJournal', journal.value);
+    savedMsg.textContent = '✓ saved ' + new Date().toLocaleTimeString();
+  }, 500);
+});
+
+/* ── export / import everything ── */
+document.getElementById('exportBtn').onclick = () => {
+  const data = {
+    checkboxes: JSON.parse(localStorage.getItem(KEY) || '[]'),
+    journal: localStorage.getItem('gmJournal') || '',
+    exportedAt: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `chess-plan-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+};
+
+document.getElementById('importFile').onchange = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (data.checkboxes) localStorage.setItem(KEY, JSON.stringify(data.checkboxes));
+      if (data.journal !== undefined) localStorage.setItem('gmJournal', data.journal);
+      alert('Backup restored! Reloading...');
+      location.reload();
+    } catch (err) {
+      alert('Invalid backup file.');
+    }
+  };
+  reader.readAsText(file);
+};
   document.getElementById('resetBtn').onclick=()=>{
     if(confirm('Start a fresh week? All checkmarks will be cleared.')){
       boxes.forEach(b=>b.checked=false); localStorage.removeItem(KEY); update();
