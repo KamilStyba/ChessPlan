@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road to II Kategoria — Training Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#141a26; --panel2:#1a2233; --line:rgba(255,255,255,.08);
+    --gold:#d8b04c; --gold2:#f0d488; --cream:#f2ead8; --muted:#8c96ab;
+    --tac:#e4584f; --play:#4f9de4; --ana:#9b6fd4; --end:#4fc08d;
+    --open:#e4a14f; --str:#d84f9b; --fun:#4fc8c0; --r:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--cream);font-family:'Inter',system-ui,sans-serif;line-height:1.55}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  section{padding:56px 0;scroll-margin-top:96px}
+  a{color:var(--gold2)}
+
+  /* ── STICKY MENU BAR ─────────────────── */
+  .topbar{position:sticky;top:0;z-index:90;background:rgba(11,14,20,.94);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .in{display:flex;align-items:center;gap:14px;padding:10px 22px;flex-wrap:wrap}
+  .brand{font-family:'Playfair Display';font-weight:800;font-size:17px;color:var(--gold);white-space:nowrap}
+  nav{display:flex;gap:2px;flex-wrap:wrap}
+  nav a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;
+    padding:7px 11px;border-radius:8px}
+  nav a:hover{color:var(--cream);background:var(--panel2)}
+  .spacer{flex:1}
+  .mini{display:flex;align-items:center;gap:10px}
+  .pbar{width:130px;height:7px;border-radius:99px;background:var(--panel2);overflow:hidden}
+  .pbar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--end),var(--gold));transition:width .3s}
+  #ptext{font-size:12px;color:var(--muted);white-space:nowrap}
+  .timer{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:5px 9px}
+  .timer select{background:var(--panel2);color:var(--cream);border:1px solid var(--line);border-radius:6px;padding:2px 4px;font-size:12px}
+  .timer button{background:var(--gold);border:none;border-radius:6px;width:26px;height:22px;cursor:pointer;font-size:11px;font-weight:800}
+  .timer .tres{background:none;color:var(--muted);width:auto}
+  #tdisp{font-size:13px;font-weight:800;color:var(--gold2);min-width:44px;text-align:center}
+  .reset{background:none;border:1px solid var(--line);color:var(--muted);font-size:12px;padding:6px 10px;border-radius:8px;cursor:pointer}
+  .reset:hover{color:var(--cream);border-color:var(--gold)}
+
+  /* ── HERO ────────────────────────────── */
+  header.hero-sec{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+    background:radial-gradient(900px 420px at 80% -10%, rgba(216,176,76,.16), transparent 60%),
+      radial-gradient(700px 380px at 10% 110%, rgba(79,157,228,.10), transparent 60%),var(--bg)}
+  .board{position:absolute;inset:0;opacity:.05;pointer-events:none;
+    background:repeating-conic-gradient(var(--cream) 0% 25%, transparent 0% 50%);background-size:72px 72px;
+    mask-image:linear-gradient(105deg,transparent 55%,black 100%);
+    -webkit-mask-image:linear-gradient(105deg,transparent 55%,black 100%)}
+  .hero{position:relative;padding:64px 0 52px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+  .kicker::before{content:"♞";font-size:18px}
+  h1{font-size:clamp(32px,5vw,54px);line-height:1.08;font-weight:800}
+  h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),var(--gold2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin-top:14px;color:var(--muted);font-size:16.5px;max-width:660px}
+  .sub b{color:var(--cream)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:14px}
+  .chip b{color:var(--gold)}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14px;border-radius:11px;padding:12px 20px}
+  .btn.gold{background:linear-gradient(120deg,var(--gold),var(--gold2));color:#0b0e14}
+  .btn.ghost{border:1px solid var(--line);color:var(--cream)}
+  .btn.ghost:hover{border-color:var(--gold)}
+
+  .sec-head{margin-bottom:28px}
+  .sec-head h2{font-size:clamp(24px,3.2vw,34px)}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:700px}
+  .sec-head p b{color:var(--cream)}
+  .num{color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.15em}
+
+  /* ── WEEK ────────────────────────────── */
+  .week{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px}
+  .day{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;
+    transition:transform .2s,border-color .2s}
+  .day:hover{transform:translateY(-3px);border-color:rgba(216,176,76,.4)}
+  .day.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 14px 40px -18px rgba(216,176,76,.45)}
+  .day.today .dh::after{content:"TODAY";font-size:10px;letter-spacing:.12em;color:#0b0e14;
+    background:var(--gold);padding:3px 8px;border-radius:6px;font-weight:800}
+  .dh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .dh h3{font-size:21px}
+  .theme{color:var(--gold);font-size:13px;font-weight:600;margin-bottom:16px}
+  .block{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;margin-bottom:8px;
+    background:var(--panel2);border-radius:10px;border-left:3px solid var(--muted)}
+  .block input{margin-top:4px;accent-color:var(--gold);width:15px;height:15px;flex:none;cursor:pointer}
+  .block .time{flex:none;font-weight:800;font-size:13px;color:var(--gold2);width:36px;margin-top:2px}
+  .block .txt{font-size:14px;color:#cfd6e4}
+  .block .txt b{color:var(--cream)}
+  .block:has(input:checked){opacity:.45}
+  .block:has(input:checked) .txt{text-decoration:line-through}
+  .go{display:inline-block;font-size:12.5px;font-weight:700;text-decoration:none;margin:4px 10px 0 0;
+    color:var(--gold2);border:1px solid rgba(216,176,76,.35);padding:3px 10px;border-radius:99px}
+  .go:hover{background:rgba(216,176,76,.12)}
+  .t-tac{border-left-color:var(--tac)} .t-play{border-left-color:var(--play)}
+  .t-ana{border-left-color:var(--ana)} .t-end{border-left-color:var(--end)}
+  .t-open{border-left-color:var(--open)} .t-str{border-left-color:var(--str)}
+  .t-fun{border-left-color:var(--fun)}
+
+  /* ── CARDS / GRIDS ───────────────────── */
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+  .card h3{font-size:20px;margin-bottom:12px}
+  .card h3 span{margin-right:8px}
+  .card.white-top{border-top:4px solid var(--cream)}
+  .card.black-top{border-top:4px solid var(--tac)}
+  .card.gap-top{border-top:4px solid var(--open)}
+  ul.cl{list-style:none}
+  ul.cl li{padding:7px 0 7px 24px;position:relative;font-size:14px;color:#cfd6e4;border-bottom:1px dashed var(--line)}
+  ul.cl li:last-child{border:none}
+  ul.cl li::before{content:"♟";position:absolute;left:2px;color:var(--gold)}
+  ul.cl b{color:var(--cream)}
+  .rot{margin-top:14px;background:var(--panel2);border-radius:10px;padding:12px 14px;font-size:13px;color:#cfd6e4}
+  .rot b{color:var(--gold2)}
+  .linkrow{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+
+  /* ── LIBRARY ─────────────────────────── */
+  .books{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:18px}
+  @media(max-width:520px){.books{grid-template-columns:1fr}}
+  .book{display:flex;gap:20px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+  .cover{flex:none;width:104px;height:152px;border-radius:8px;display:grid;place-items:center;text-align:center;
+    font-family:'Playfair Display';font-weight:800;font-size:13px;padding:10px;line-height:1.3;
+    box-shadow:0 12px 30px -12px rgba(0,0,0,.7)}
+  .cov-euwe{background:linear-gradient(160deg,#27405e,#16243a);color:#dce8f5;border:1px solid #3d5a7e}
+  .cov-aag{background:linear-gradient(160deg,#6e2430,#3a1118);color:#f5dcdc;border:1px solid #8e3a48}
+  .book h3{font-size:19px}
+  .book .auth{color:var(--muted);font-size:13px;margin-bottom:10px}
+  .book p{font-size:14px;color:#cfd6e4;margin-bottom:10px}
+  .tagline{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;border-radius:6px;
+    padding:3px 8px;margin-bottom:10px;text-transform:uppercase}
+  .tg-b{background:rgba(79,157,228,.15);color:#9cc8f0}
+  .tg-r{background:rgba(228,88,79,.15);color:#f0a59c}
+
+  /* ── ROADMAP ─────────────────────────── */
+  .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .phase{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px;position:relative}
+  .pnum{position:absolute;top:-16px;left:22px;width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b0e14;font-weight:800;display:grid;place-items:center}
+  .phase .w{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .phase h3{margin:8px 0 4px;font-size:20px}
+  .phase ul{list-style:none;margin-top:12px}
+  .phase li{font-size:14px;color:#cfd6e4;padding:5px 0 5px 22px;position:relative}
+  .phase li::before{content:"▸";position:absolute;left:4px;color:var(--gold)}
+  .target{margin-top:14px;padding:10px 14px;background:var(--panel2);border-radius:10px;font-size:13px}
+  .target b{color:var(--gold2)}
+
+  ol.rules{margin-left:20px}
+  ol.rules li{padding:7px 0;font-size:14.5px;color:#cfd6e4}
+  ol.rules li::marker{color:var(--gold);font-weight:800}
+  ol.rules b{color:var(--cream)}
+  .pz{border-color:rgba(216,176,76,.35);background:linear-gradient(160deg,rgba(216,176,76,.08),transparent 45%),var(--panel)}
+
+  /* ── ARSENAL LINKS ───────────────────── */
+  .lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
+  .lnk{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:16px;transition:.2s}
+  .lnk:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .lnk .ic{font-size:20px}
+  .lnk .tt{font-weight:700;font-size:14px;color:var(--cream);margin-top:6px}
+  .lnk .dd{font-size:12px;color:var(--muted);margin-top:2px}
+  .gtitle{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--gold);margin:26px 0 12px;text-transform:uppercase}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;text-align:center}
+  footer .q{font-family:'Playfair Display';font-size:22px;color:var(--gold2)}
+  footer .a{color:var(--muted);font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- ════ MENU ════ -->
+<div class="topbar"><div class="in">
+  <span class="brand">♞ Road to II kat.</span>
+  <nav>
+    <a href="#week">Week</a><a href="#openings">Opening Lab</a><a href="#library">Library</a>
+    <a href="#roadmap">Roadmap</a><a href="#rules">Rules</a><a href="#links">Arsenal</a>
+  </nav>
+  <span class="spacer"></span>
+  <div class="mini">
+    <span id="ptext">0 / 25</span>
+    <div class="pbar"><i id="pfill"></i></div>
+    <div class="timer" title="Session timer">⏱
+      <select id="tmin"><option>15</option><option>20</option><option selected>25</option><option>30</option>
+        <option>35</option><option>40</option><option>45</option><option>50</option><option>65</option><option>75</option></select>
+      <span id="tdisp">25:00</span>
+      <button id="tstart">▶</button><button id="tres" class="tres">↺</button>
+    </div>
+    <button class="reset" id="resetBtn">↺ New week</button>
+  </div>
+</div></div>
+
+<!-- ════ HERO ════ -->
+<header class="hero-sec"><div class="board"></div>
+  <div class="wrap hero">
+    <div class="kicker">Personal Training Hub · 2h / day</div>
+    <h1>Your Road to <em>II Kategoria</em></h1>
+    <p class="sub">Built around <b>your</b> weapons: the <b>Queen's Gambit</b> as White, the <b>Sicilian Defense</b> as Black,
+      and your bookshelf — <b>Euwe</b> for planning, <b>Aagaard</b> for attack. Every block below is clickable: tick it when done,
+      use the ⏱ timer in the menu, and follow the links straight to the right training tool.</p>
+    <div class="chips">
+      <div class="chip">♛ chess.com <b>1100 → 1400</b></div>
+      <div class="chip">🇵🇱 <b>III → II kategoria</b></div>
+      <div class="chip">♕ White: <b>Queen's Gambit</b></div>
+      <div class="chip">♟ Black: <b>Sicilian</b></div>
+      <div class="chip">⏱ <b>14 h / week</b></div>
+    </div>
+    <div class="cta">
+      <a class="btn gold" href="#week" id="todayBtn">▶ Jump to today's session</a>
+      <a class="btn ghost" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Play rapid on chess.com ↗</a>
+      <a class="btn ghost" href="https://lichess.org/training" target="_blank" rel="noopener">Solve puzzles on Lichess ↗</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ════ 01 WEEK ════ -->
+  <section id="week">
+    <div class="sec-head"><div class="num">01 — THE WEEK</div>
+      <h2>Your 7-Day Cycle</h2>
+      <p>Exactly 120 minutes a day. Tick sessions as you finish — progress saves in your browser.
+         Hit <b>“New week”</b> every Monday morning.</p>
+    </div>
+    <div class="week">
+
+      <div class="day" data-d="1">
+        <div class="dh"><h3>Monday</h3></div><div class="theme">⚔ Tactics + Rapid</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="mo1"><span class="time">45′</span>
+          <span class="txt"><b>Tactics — motif of the week.</b> wk1 forks · wk2 pins · wk3 skewers · wk4 mate-in-2. Calculate fully before moving.<br>
+          <a class="go" href="https://lichess.org/training/fork" target="_blank" rel="noopener">Forks ↗</a>
+          <a class="go" href="https://lichess.org/training/pin" target="_blank" rel="noopener">Pins ↗</a>
+          <a class="go" href="https://lichess.org/training/skewer" target="_blank" rel="noopener">Skewers ↗</a>
+          <a class="go" href="https://lichess.org/training/mateIn2" target="_blank" rel="noopener">Mate in 2 ↗</a></span></label>
+        <label class="block t-play"><input type="checkbox" class="chk" id="mo2"><span class="time">50′</span>
+          <span class="txt"><b>Two rapid games, 15+10.</b> Steer into Queen's Gambit / Sicilian. CCT before every move.<br>
+          <a class="go" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Play ↗</a></span></label>
+        <label class="block t-ana"><input type="checkbox" class="chk" id="mo3"><span class="time">25′</span>
+          <span class="txt"><b>Analyse both games</b> — your brain first, engine second. Log blunders in the journal.<br>
+          <a class="go" href="https://www.chess.com/analysis" target="_blank" rel="noopener">Analysis board ↗</a></span></label>
+      </div>
+
+      <div class="day" data-d="2">
+        <div class="dh"><h3>Tuesday</h3></div><div class="theme">🏰 Endgame Day</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="tu1"><span class="time">20′</span>
+          <span class="txt"><b>Tactics warm-up</b> — 10–15 mixed puzzles.<br>
+          <a class="go" href="https://www.chess.com/puzzles/rated" target="_blank" rel="noopener">chess.com puzzles ↗</a></span></label>
+        <label class="block t-end"><input type="checkbox" class="chk" id="tu2"><span class="time">45′</span>
+          <span class="txt"><b>Endgame lesson.</b> wk1 basic mates · wk2 K+P opposition & key squares · wk3 promotion races · wk4 rook endings 101.<br>
+          <a class="go" href="https://lichess.org/practice" target="_blank" rel="noopener">Lichess Practice ↗</a></span></label>
+        <label class="block t-end"><input type="checkbox" class="chk" id="tu3"><span class="time">35′</span>
+          <span class="txt"><b>Drills on today's theme</b> until 100% clean.<br>
+          <a class="go" href="https://lichess.org/training/pawnEndgame" target="_blank" rel="noopener">Pawn endings ↗</a>
+          <a class="go" href="https://lichess.org/training/rookEndgame" target="_blank" rel="noopener">Rook endings ↗</a></span></label>
+        <label class="block t-end"><input type="checkbox" class="chk" id="tu4"><span class="time">20′</span>
+          <span class="txt"><b>Play it out vs engine.</b> Set up the position in the editor → “Continue from here”. Lose it? Again.<br>
+          <a class="go" href="https://lichess.org/editor" target="_blank" rel="noopener">Board editor ↗</a></span></label>
+      </div>
+
+      <div class="day" data-d="3">
+        <div class="dh"><h3>Wednesday</h3></div><div class="theme">📖 Opening Lab + Rapid</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="we1"><span class="time">20′</span>
+          <span class="txt"><b>Tactics warm-up.</b><br>
+          <a class="go" href="https://lichess.org/training" target="_blank" rel="noopener">Puzzle mix ↗</a></span></label>
+        <label class="block t-open"><input type="checkbox" class="chk" id="we2"><span class="time">30′</span>
+          <span class="txt"><b>Opening Lab session</b> — this week's theme from your rotation below (QG one week, Sicilian the next).<br>
+          <a class="go" href="#openings">Open the Lab ↓</a></span></label>
+        <label class="block t-play"><input type="checkbox" class="chk" id="we3"><span class="time">50′</span>
+          <span class="txt"><b>Two rapid games, 15+10</b> — play today's lab opening on purpose.<br>
+          <a class="go" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Play ↗</a></span></label>
+        <label class="block t-ana"><input type="checkbox" class="chk" id="we4"><span class="time">20′</span>
+          <span class="txt"><b>Review the opening phase</b> with the explorer — where did you leave “book”, and was it good or bad?<br>
+          <a class="go" href="https://lichess.org/analysis" target="_blank" rel="noopener">Explorer ↗</a></span></label>
+      </div>
+
+      <div class="day" data-d="4">
+        <div class="dh"><h3>Thursday</h3></div><div class="theme">🧠 Book Day — Euwe / Aagaard</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="th1"><span class="time">20′</span>
+          <span class="txt"><b>Tactics warm-up.</b><br>
+          <a class="go" href="https://lichess.org/training" target="_blank" rel="noopener">Puzzle mix ↗</a></span></label>
+        <label class="block t-str"><input type="checkbox" class="chk" id="th2"><span class="time">40′</span>
+          <span class="txt"><b>Book session</b> — odd weeks: <b>Euwe</b>, even weeks: <b>Aagaard</b>. Real board, not a screen. Reading plan below.<br>
+          <a class="go" href="#library">Open Library ↓</a></span></label>
+        <label class="block t-str"><input type="checkbox" class="chk" id="th3"><span class="time">40′</span>
+          <span class="txt"><b>One master game in YOUR opening</b> (QG or Sicilian). Guess each move before revealing.<br>
+          <a class="go" href="https://www.chess.com/games" target="_blank" rel="noopener">Master games DB ↗</a>
+          <a class="go" href="https://lichess.org/study" target="_blank" rel="noopener">Lichess studies ↗</a></span></label>
+        <label class="block t-ana"><input type="checkbox" class="chk" id="th4"><span class="time">20′</span>
+          <span class="txt"><b>Write 3 takeaways</b> in your journal — in your own words.</span></label>
+      </div>
+
+      <div class="day" data-d="5">
+        <div class="dh"><h3>Friday</h3></div><div class="theme">♟ Play Day</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="fr1"><span class="time">25′</span>
+          <span class="txt"><b>Tactics warm-up.</b><br>
+          <a class="go" href="https://www.chess.com/puzzles/rated" target="_blank" rel="noopener">Puzzles ↗</a></span></label>
+        <label class="block t-play"><input type="checkbox" class="chk" id="fr2"><span class="time">65′</span>
+          <span class="txt"><b>Rapid block, 15+10</b> — 2–3 games, tournament discipline: sit on your hands.<br>
+          <a class="go" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Play ↗</a></span></label>
+        <label class="block t-ana"><input type="checkbox" class="chk" id="fr3"><span class="time">30′</span>
+          <span class="txt"><b>Analyse + blunder journal.</b> Name the pattern behind every mistake (“hanging piece”, “missed check”…).<br>
+          <a class="go" href="https://www.chess.com/analysis" target="_blank" rel="noopener">Analysis ↗</a></span></label>
+      </div>
+
+      <div class="day" data-d="6">
+        <div class="dh"><h3>Saturday</h3></div><div class="theme">🏆 Classical Day — OTB Simulation</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="sa1"><span class="time">15′</span>
+          <span class="txt"><b>Light warm-up</b> — easy puzzles only, save energy.<br>
+          <a class="go" href="https://lichess.org/training" target="_blank" rel="noopener">Warm up ↗</a></span></label>
+        <label class="block t-play"><input type="checkbox" class="chk" id="sa2"><span class="time">75′</span>
+          <span class="txt"><b>One classical game, 30+30</b> (custom time control). Write the moves down like at a PZSzach tournament.<br>
+          <a class="go" href="https://lichess.org/" target="_blank" rel="noopener">Lichess custom game ↗</a></span></label>
+        <label class="block t-ana"><input type="checkbox" class="chk" id="sa3"><span class="time">30′</span>
+          <span class="txt"><b>Deep analysis.</b> Annotate 3 critical moments yourself, then verify with the engine.<br>
+          <a class="go" href="https://lichess.org/analysis" target="_blank" rel="noopener">Analysis ↗</a></span></label>
+      </div>
+
+      <div class="day" data-d="0">
+        <div class="dh"><h3>Sunday</h3></div><div class="theme">🔁 Review + Fun</div>
+        <label class="block t-tac"><input type="checkbox" class="chk" id="su1"><span class="time">25′</span>
+          <span class="txt"><b>Re-solve every puzzle you failed this week</b> — check your puzzle history. This is where patterns stick.<br>
+          <a class="go" href="https://lichess.org/training" target="_blank" rel="noopener">Puzzle history ↗</a></span></label>
+        <label class="block t-ana"><input type="checkbox" class="chk" id="su2"><span class="time">35′</span>
+          <span class="txt"><b>Weekly review.</b> Skim all games in your archive, name your <b>“mistake of the week”</b> — next week's focus.<br>
+          <a class="go" href="https://www.chess.com/games/archive" target="_blank" rel="noopener">Game archive ↗</a></span></label>
+        <label class="block t-str"><input type="checkbox" class="chk" id="su3"><span class="time">30′</span>
+          <span class="txt"><b>Watch & learn</b> — instructive video on this week's theme, or extra book reading.<br>
+          <a class="go" href="https://www.youtube.com/@DanielNaroditskyGM" target="_blank" rel="noopener">Naroditsky ↗</a>
+          <a class="go" href="https://www.youtube.com/@chessbrah" target="_blank" rel="noopener">Building Habits ↗</a></span></label>
+        <label class="block t-fun"><input type="checkbox" class="chk" id="su4"><span class="time">30′</span>
+          <span class="txt"><b>Fun chess</b> — Puzzle Rush or Chess960. Keep the love alive.<br>
+          <a class="go" href="https://www.chess.com/puzzles/rush" target="_blank" rel="noopener">Puzzle Rush ↗</a>
+          <a class="go" href="https://lichess.org/variant/chess960" target="_blank" rel="noopener">Chess960 ↗</a></span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 02 OPENING LAB ════ -->
+  <section id="openings">
+    <div class="sec-head"><div class="num">02 — OPENING LAB</div>
+      <h2>Your Repertoire: Queen's Gambit & Sicilian</h2>
+      <p>Wednesday's 30′ lab alternates: <b>odd weeks White, even weeks Black</b>. Max 8 moves deep —
+         at 1100 you win with <b>ideas and plans</b>, not memorized theory.</p>
+    </div>
+    <div class="cols">
+
+      <div class="card white-top">
+        <h3><span>♕</span>White: Queen's Gambit</h3>
+        <ul class="cl">
+          <li><b>Core plans:</b> pressure d5, develop Nc3–Nf3–Bg5/Bf4–e3, castle short, rooks to c1/d1.</li>
+          <li><b>Learn the Carlsbad structure</b> (after cxd5 exd5): the minority attack b4–b5 is your first “real plan” — and Euwe's book explains exactly this kind of thinking.</li>
+          <li>vs <b>QGA (2…dxc4):</b> don't panic — e3/e4, Bxc4, you regain the pawn; watch out for …b5 tricks.</li>
+          <li>vs <b>Slav (2…c6):</b> simple development, e3, consider Qb3 pressure on b7/d5.</li>
+        </ul>
+        <div class="rot"><b>Lab rotation:</b> W1 Exchange QGD + minority attack · W2 vs QGA · W3 vs Slav · W4 traps & sidelines (Albin, Englund) + 3 model games.</div>
+        <div class="linkrow">
+          <a class="go" href="https://lichess.org/analysis" target="_blank" rel="noopener">Lichess explorer ↗</a>
+          <a class="go" href="https://www.chess.com/explorer" target="_blank" rel="noopener">chess.com explorer ↗</a>
+          <a class="go" href="https://www.chessable.com" target="_blank" rel="noopener">Chessable course ↗</a>
+        </div>
+      </div>
+
+      <div class="card black-top">
+        <h3><span>♛</span>Black: Sicilian Defense</h3>
+        <ul class="cl">
+          <li><b>Pick ONE line vs the Open Sicilian and marry it.</b> With Aagaard on your shelf, an aggressive setup suits you — but consistency matters more than the choice.</li>
+          <li><b>Reality check:</b> at your level ~70% of games are <b>Anti-Sicilians</b>. Your priority is meeting 2.c3 (Alapin), the Smith–Morra and the Grand Prix.</li>
+          <li><b>Core plans:</b> fight for d4, queenside play with …a6/…b5, rook to c8, hit e4; the thematic …Rxc3 exchange sac is pure Aagaard material.</li>
+          <li>Don't fear early queen raids and Scholar's-mate tries — develop with tempo, punish them.</li>
+        </ul>
+        <div class="rot"><b>Lab rotation:</b> W1 your main line vs Open · W2 vs Alapin 2.c3 · W3 vs Smith–Morra & Grand Prix · W4 model games in your line.</div>
+        <div class="linkrow">
+          <a class="go" href="https://lichess.org/analysis" target="_blank" rel="noopener">Lichess explorer ↗</a>
+          <a class="go" href="https://www.chess.com/games" target="_blank" rel="noopener">Master games ↗</a>
+          <a class="go" href="https://lichess.org/study" target="_blank" rel="noopener">Find a study ↗</a>
+        </div>
+      </div>
+
+      <div class="card gap-top">
+        <h3><span>⚠</span>Repertoire Gap: Black vs 1.d4</h3>
+        <ul class="cl">
+          <li>You told me what you play as White and vs 1.e4 — but <b>what about 1.d4?</b></li>
+          <li><b>Coach's pick: the QGD as Black.</b> You already study the Queen's Gambit as White — playing both sides doubles your understanding of every plan, including defending against your own minority attack.</li>
+          <li>Solid alternative: the <b>Slav</b>. Decide by week 3 and add it to the lab rotation.</li>
+        </ul>
+        <div class="rot"><b>Action:</b> one extra 15′ explorer session this week — play 5 casual games with the QGD as Black and see how it feels.</div>
+        <div class="linkrow">
+          <a class="go" href="https://www.chess.com/explorer" target="_blank" rel="noopener">Explore QGD ↗</a>
+          <a class="go" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Test it ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 03 LIBRARY ════ -->
+  <section id="library">
+    <div class="sec-head"><div class="num">03 — YOUR LIBRARY</div>
+      <h2>Your Two Books, On a Schedule</h2>
+      <p>Thursday's 40′ book block alternates between them. Always with a <b>real board</b> — set up every diagram, never just read.</p>
+    </div>
+    <div class="books">
+
+      <div class="book">
+        <div class="cover cov-euwe">OCENA POZYCJI<br>I PLANOWANIE<br><br>M. EUWE</div>
+        <div>
+          <span class="tagline tg-b">Odd weeks · Thursday · 40′</span>
+          <h3>„Ocena pozycji i planowanie”</h3>
+          <div class="auth">Max Euwe — World Champion 1935–37</div>
+          <p><b>Your planning textbook.</b> One chapter/theme per session. Before reading Euwe's plan for a position,
+             cover the text and <b>write your own plan first</b> — then compare. That gap is exactly what you're training.</p>
+          <p><b>Synergy:</b> his pawn-structure and open-file themes map directly onto your QGD/Carlsbad positions. After each chapter, find one of your own games where the theme appeared.</p>
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="cover cov-aag">AGRESYWNE<br>SZACHY<br><br>J. AAGAARD</div>
+        <div>
+          <span class="tagline tg-r">Even weeks · Thursday · 40′</span>
+          <h3>„Agresywne szachy”</h3>
+          <div class="auth">Jacob Aagaard — GM, master of attack</div>
+          <p><b>Your ambition book.</b> Honest warning: Aagaard writes for stronger players, so go <b>slow</b> — half a chapter is a win.
+             Treat every diagram as a puzzle: calculate your answer fully before reading his.</p>
+          <p><b>Synergy:</b> attacking principles (include all pieces, momentum, weakest point) are the soul of your Sicilian counterplay. One attacking idea per session goes into the journal.</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:18px;color:var(--muted);font-size:13.5px">📌 When the budget allows, the missing third pillar for Tuesdays:
+      <i>Silman's Complete Endgame Course</i> — until then, <a href="https://lichess.org/practice" target="_blank" rel="noopener">Lichess Practice ↗</a> covers you for free.</p>
+  </section>
+
+  <!-- ════ 04 ROADMAP ════ -->
+  <section id="roadmap">
+    <div class="sec-head"><div class="num">04 — THE ROADMAP</div>
+      <h2>Three Phases, Twelve Weeks</h2>
+    </div>
+    <div class="phases">
+      <div class="phase"><div class="pnum">1</div><div class="w">Weeks 1–4</div>
+        <h3>Blunder-Proofing</h3>
+        <ul>
+          <li>CCT habit on every move</li>
+          <li>Forks, pins, skewers, mate-in-2</li>
+          <li>Basic mates + K+P opposition cold</li>
+          <li>Euwe ch. 1–2 · QG & Sicilian lab W1–W4</li>
+        </ul>
+        <div class="target">🎯 <b>~1200 chess.com</b> · zero one-move blunders on Saturdays</div>
+      </div>
+      <div class="phase"><div class="pnum">2</div><div class="w">Weeks 5–8</div>
+        <h3>Calculation & Plans</h3>
+        <ul>
+          <li>2–3 move combos: discovered attack, deflection, removing the defender</li>
+          <li>Rook endings: Lucena & Philidor</li>
+          <li>Anti-Sicilians mastered · minority attack executed in a real game</li>
+          <li>First classified OTB tournament</li>
+        </ul>
+        <div class="target">🎯 <b>~1300 chess.com</b> · first PZSzach event at full focus</div>
+      </div>
+      <div class="phase"><div class="pnum">3</div><div class="w">Weeks 9–12</div>
+        <h3>Tournament Mode</h3>
+        <ul>
+          <li>Stamina: full-length Saturday classics</li>
+          <li>Convert wins: trade when ahead</li>
+          <li>Aagaard's attacking ideas in your Sicilians</li>
+          <li>Classified weekend tournament — go hunting</li>
+        </ul>
+        <div class="target">🎯 <b>~1400 chess.com</b> + attempt the <b>II kategoria norm</b> (1800 M / 1600 W)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 05 RULES ════ -->
+  <section id="rules">
+    <div class="sec-head"><div class="num">05 — THE DISCIPLINE</div>
+      <h2>Grandmaster's 8 Rules</h2>
+    </div>
+    <div class="cols">
+      <div class="card">
+        <ol class="rules">
+          <li><b>Before every move: Checks, Captures, Threats</b> — yours <i>and</i> your opponent's.</li>
+          <li><b>No bullet.</b> 15+10 or slower only (Sunday fun is the exception).</li>
+          <li>Solve puzzles like real games — <b>calculate to the end</b> before touching a piece.</li>
+          <li><b>Analyse every game you play.</b> Brain first, engine second.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <ol class="rules" start="5">
+          <li>Keep a <b>blunder journal</b>; reread it before each play session.</li>
+          <li><b>Openings = your two weapons only.</b> Every game a QG or a Sicilian — repetition builds mastery.</li>
+          <li><b>Ahead? Trade pieces. Behind? Complicate</b> (the Aagaard way).</li>
+          <li><b>Consistency beats heroics</b> — tired? Take the rest day guilt-free.</li>
+        </ol>
+      </div>
+      <div class="card pz">
+        <h3><span>🇵🇱</span>PZSzach Corner</h3>
+        <ul class="cl">
+          <li><b>The target:</b> II kategoria norm — 1800 (M) / 1600 (W) performance in one classified tournament; one fulfillment is enough.</li>
+          <li>Score at least <b>1/3 of the points</b>, classical tempo required.</li>
+          <li>Your category is <b>lifetime</b> — play boldly.</li>
+        </ul>
+        <div class="linkrow">
+          <a class="go" href="http://www.cr-pzszach.pl" target="_blank" rel="noopener">Central Register ↗</a>
+          <a class="go" href="http://www.chessarbiter.com/turnieje.php" target="_blank" rel="noopener">ChessArbiter ↗</a>
+          <a class="go" href="https://www.chessmanager.com" target="_blank" rel="noopener">ChessManager ↗</a>
+          <a class="go" href="https://pzszach.pl" target="_blank" rel="noopener">PZSzach ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 06 ARSENAL ════ -->
+  <section id="links">
+    <div class="sec-head"><div class="num">06 — THE ARSENAL</div>
+      <h2>Every Tool, One Click Away</h2>
+    </div>
+
+    <div class="gtitle">▸ Play</div>
+    <div class="lgrid">
+      <a class="lnk" href="https://www.chess.com/play/online" target="_blank" rel="noopener"><div class="ic">♟</div><div class="tt">chess.com — Rapid 15+10</div><div class="dd">Your main playing ground</div></a>
+      <a class="lnk" href="https://lichess.org/" target="_blank" rel="noopener"><div class="ic">🏆</div><div class="tt">Lichess — Classical 30+30</div><div class="dd">Saturday OTB simulation</div></a>
+      <a class="lnk" href="https://www.chess.com/play/computer" target="_blank" rel="noopener"><div class="ic">🤖</div><div class="tt">Play vs Bots</div><div class="dd">Test openings risk-free</div></a>
+    </div>
+
+    <div class="gtitle">▸ Train</div>
+    <div class="lgrid">
+      <a class="lnk" href="https://lichess.org/training" target="_blank" rel="noopener"><div class="ic">⚔</div><div class="tt">Lichess Puzzles</div><div class="dd">Free, sorted by motif</div></a>
+      <a class="lnk" href="https://www.chess.com/puzzles/rated" target="_blank" rel="noopener"><div class="ic">🧩</div><div class="tt">chess.com Puzzles</div><div class="dd">Daily rated solving</div></a>
+      <a class="lnk" href="https://lichess.org/practice" target="_blank" rel="noopener"><div class="ic">🏰</div><div class="tt">Lichess Practice</div><div class="dd">Endgame drills (Tuesdays)</div></a>
+      <a class="lnk" href="https://www.chess.com/puzzles/rush" target="_blank" rel="noopener"><div class="ic">🔥</div><div class="tt">Puzzle Rush</div><div class="dd">Sunday fun block</div></a>
+    </div>
+
+    <div class="gtitle">▸ Study</div>
+    <div class="lgrid">
+      <a class="lnk" href="https://lichess.org/analysis" target="_blank" rel="noopener"><div class="ic">🔍</div><div class="tt">Analysis + Explorer</div><div class="dd">Opening phase reviews</div></a>
+      <a class="lnk" href="https://www.chess.com/games" target="_blank" rel="noopener"><div class="ic">📜</div><div class="tt">Master Games DB</div><div class="dd">QG & Sicilian classics</div></a>
+      <a class="lnk" href="https://lichess.org/study" target="_blank" rel="noopener"><div class="ic">📚</div><div class="tt">Lichess Studies</div><div class="dd">Free community courses</div></a>
+      <a class="lnk" href="https://www.chessable.com" target="_blank" rel="noopener"><div class="ic">🎓</div><div class="tt">Chessable</div><div class="dd">Free “Short & Sweet” courses</div></a>
+    </div>
+
+    <div class="gtitle">▸ Watch (Sunday)</div>
+    <div class="lgrid">
+      <a class="lnk" href="https://www.youtube.com/@DanielNaroditskyGM" target="_blank" rel="noopener"><div class="ic">🎥</div><div class="tt">Daniel Naroditsky</div><div class="dd">Speedruns = pure gold for 1100</div></a>
+      <a class="lnk" href="https://www.youtube.com/@chessbrah" target="_blank" rel="noopener"><div class="ic">🛠</div><div class="tt">ChessBrah — Building Habits</div><div class="dd">Exactly your rating range</div></a>
+      <a class="lnk" href="https://www.youtube.com/@GothamChess" target="_blank" rel="noopener"><div class="ic">📣</div><div class="tt">GothamChess</div><div class="dd">Openings & game reviews</div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="q">“When you see a good move, look for a better one.”</div>
+  <div class="a">— Emanuel Lasker · Queen's Gambit with the brain, Sicilian with the heart.</div>
+</footer>
+
+<script>
+  /* ── progress + checkboxes ── */
+  const KEY='gmPlanV2';
+  const boxes=[...document.querySelectorAll('input.chk')];
+  const saved=JSON.parse(localStorage.getItem(KEY)||'[]');
+  boxes.forEach(b=>{ if(saved.includes(b.id)) b.checked=true; b.addEventListener('change',update); });
+  function update(){
+    const done=boxes.filter(b=>b.checked);
+    localStorage.setItem(KEY,JSON.stringify(done.map(b=>b.id)));
+    document.getElementById('pfill').style.width=(done.length/boxes.length*100)+'%';
+    document.getElementById('ptext').textContent=`${done.length} / ${boxes.length}`;
+  }
+  document.getElementById('resetBtn').onclick=()=>{
+    if(confirm('Start a fresh week? All checkmarks will be cleared.')){
+      boxes.forEach(b=>b.checked=false); localStorage.removeItem(KEY); update();
+    }
+  };
+
+  /* ── highlight today + jump ── */
+  const today=document.querySelector(`.day[data-d="${new Date().getDay()}"]`);
+  if(today){ today.classList.add('today');
+    document.getElementById('todayBtn').addEventListener('click',e=>{
+      e.preventDefault(); today.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  }
+
+  /* ── session timer ── */
+  const disp=document.getElementById('tdisp'), sel=document.getElementById('tmin'),
+        sBtn=document.getElementById('tstart'), rBtn=document.getElementById('tres');
+  let left=25*60, run=null;
+  const fmt=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+  const render=()=>{ disp.textContent=fmt(left); document.title=run?`⏱ ${fmt(left)} — Training`:'Road to II Kategoria — Training Hub'; };
+  function beep(){ try{ const c=new (window.AudioContext||window.webkitAudioContext)();
+    const o=c.createOscillator(),g=c.createGain(); o.connect(g); g.connect(c.destination);
+    o.frequency.value=880; g.gain.value=.15; o.start();
+    setTimeout(()=>{o.stop();c.close();},700);}catch(e){} }
+  sel.onchange=()=>{ clearInterval(run); run=null; sBtn.textContent='▶'; left=sel.value*60; render(); };
+  sBtn.onclick=()=>{
+    if(run){ clearInterval(run); run=null; sBtn.textContent='▶'; render(); return; }
+    sBtn.textContent='❚❚';
+    run=setInterval(()=>{ left--; render();
+      if(left<=0){ clearInterval(run); run=null; sBtn.textContent='▶';
+        disp.textContent='DONE!'; beep(); setTimeout(beep,800); setTimeout(beep,1600); }
+    },1000);
+  };
+  rBtn.onclick=()=>{ clearInterval(run); run=null; sBtn.textContent='▶'; left=sel.value*60; render(); };
+  render(); update();
+</script>
+</body>
+</html>
