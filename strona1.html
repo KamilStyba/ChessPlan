@@ -166,18 +166,20 @@
   .lnk .dd{font-size:12px;color:var(--muted);margin-top:2px}
   .gtitle{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--gold);margin:26px 0 12px;text-transform:uppercase}
 
+  /* ── NOTES ───────────────────────────── */
+  .notes-wrap{margin-top:18px}
+  .notes-wrap textarea{width:100%;min-height:160px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;padding:14px;resize:vertical}
+  .notes-wrap textarea:focus{outline:none;border-color:var(--gold)}
+  .notes-actions{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .notes-actions button,.notes-actions label{cursor:pointer;font-size:13px;font-weight:700;
+    background:var(--panel);border:1px solid var(--line);color:var(--cream);border-radius:9px;padding:8px 14px}
+  .notes-actions button:hover,.notes-actions label:hover{border-color:var(--gold)}
+  .notes-saved{font-size:12px;color:var(--muted);align-self:center}
+
   footer{border-top:1px solid var(--line);padding:44px 0;text-align:center}
   footer .q{font-family:'Playfair Display';font-size:22px;color:var(--gold2)}
   footer .a{color:var(--muted);font-size:13px;margin-top:8px}
-  .notes-wrap{margin-top:18px}
-.notes-wrap textarea{width:100%;min-height:160px;background:var(--panel2);border:1px solid var(--line);
-  border-radius:10px;color:var(--cream);font-family:'Inter',sans-serif;font-size:14px;padding:14px;resize:vertical}
-.notes-wrap textarea:focus{outline:none;border-color:var(--gold)}
-.notes-actions{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-.notes-actions button, .notes-actions label{cursor:pointer;font-size:13px;font-weight:700;
-  background:var(--panel);border:1px solid var(--line);color:var(--cream);border-radius:9px;padding:8px 14px}
-.notes-actions button:hover, .notes-actions label:hover{border-color:var(--gold)}
-.notes-saved{font-size:12px;color:var(--muted);align-self:center}
 </style>
 </head>
 <body>
@@ -218,6 +220,7 @@
       <div class="chip">♕ White: <b>Queen's Gambit</b></div>
       <div class="chip">♟ Black: <b>Sicilian</b></div>
       <div class="chip">⏱ <b>14 h / week</b></div>
+      <div class="chip">🏃 <b>Walk/stretch 2–3× / week</b></div>
     </div>
     <div class="cta">
       <a class="btn gold" href="#week" id="todayBtn">▶ Jump to today's session</a>
@@ -234,14 +237,14 @@
     <div class="sec-head"><div class="num">01 — THE WEEK</div>
       <h2>Your 7-Day Cycle</h2>
       <p>Exactly 120 minutes a day. Tick sessions as you finish — progress saves in your browser.
-         Hit <b>“New week”</b> every Monday morning.</p>
+         Hit <b>"New week"</b> every Monday morning.</p>
     </div>
     <div class="week">
 
       <div class="day" data-d="1">
         <div class="dh"><h3>Monday</h3></div><div class="theme">⚔ Tactics + Rapid</div>
         <label class="block t-tac"><input type="checkbox" class="chk" id="mo1"><span class="time">45′</span>
-          <span class="txt"><b>Tactics — motif of the week.</b> wk1 forks · wk2 pins · wk3 skewers · wk4 mate-in-2. Calculate fully before moving.<br>
+          <span class="txt"><b>Tactics — motif of the week.</b> wk1 forks · wk2 pins · wk3 skewers · wk4 mate-in-2. Calculate fully before moving. <b>Quality over quantity</b> — 10 deeply solved puzzles beat 50 quick clicks.<br>
           <a class="go" href="https://lichess.org/training/fork" target="_blank" rel="noopener">Forks ↗</a>
           <a class="go" href="https://lichess.org/training/pin" target="_blank" rel="noopener">Pins ↗</a>
           <a class="go" href="https://lichess.org/training/skewer" target="_blank" rel="noopener">Skewers ↗</a>
@@ -267,7 +270,7 @@
           <a class="go" href="https://lichess.org/training/pawnEndgame" target="_blank" rel="noopener">Pawn endings ↗</a>
           <a class="go" href="https://lichess.org/training/rookEndgame" target="_blank" rel="noopener">Rook endings ↗</a></span></label>
         <label class="block t-end"><input type="checkbox" class="chk" id="tu4"><span class="time">20′</span>
-          <span class="txt"><b>Play it out vs engine.</b> Set up the position in the editor → “Continue from here”. Lose it? Again.<br>
+          <span class="txt"><b>Play it out vs engine.</b> Set up the position in the editor → "Continue from here". Lose it? Again.<br>
           <a class="go" href="https://lichess.org/editor" target="_blank" rel="noopener">Board editor ↗</a></span></label>
       </div>
 
@@ -283,7 +286,7 @@
           <span class="txt"><b>Two rapid games, 15+10</b> — play today's lab opening on purpose.<br>
           <a class="go" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Play ↗</a></span></label>
         <label class="block t-ana"><input type="checkbox" class="chk" id="we4"><span class="time">20′</span>
-          <span class="txt"><b>Review the opening phase</b> with the explorer — where did you leave “book”, and was it good or bad?<br>
+          <span class="txt"><b>Review the opening phase</b> with the explorer — where did you leave "book", and was it good or bad?<br>
           <a class="go" href="https://lichess.org/analysis" target="_blank" rel="noopener">Explorer ↗</a></span></label>
       </div>
 
@@ -312,7 +315,7 @@
           <span class="txt"><b>Rapid block, 15+10</b> — 2–3 games, tournament discipline: sit on your hands.<br>
           <a class="go" href="https://www.chess.com/play/online" target="_blank" rel="noopener">Play ↗</a></span></label>
         <label class="block t-ana"><input type="checkbox" class="chk" id="fr3"><span class="time">30′</span>
-          <span class="txt"><b>Analyse + blunder journal.</b> Name the pattern behind every mistake (“hanging piece”, “missed check”…).<br>
+          <span class="txt"><b>Analyse + blunder journal.</b> Name the pattern behind every mistake ("hanging piece", "missed check"…).<br>
           <a class="go" href="https://www.chess.com/analysis" target="_blank" rel="noopener">Analysis ↗</a></span></label>
       </div>
 
@@ -332,10 +335,10 @@
       <div class="day" data-d="0">
         <div class="dh"><h3>Sunday</h3></div><div class="theme">🔁 Review + Fun</div>
         <label class="block t-tac"><input type="checkbox" class="chk" id="su1"><span class="time">25′</span>
-          <span class="txt"><b>Re-solve every puzzle you failed this week</b> — check your puzzle history. This is where patterns stick.<br>
+          <span class="txt"><b>Re-solve every puzzle you failed this week</b> — check your puzzle history. Repeating the same puzzles until they're clean is how patterns stick (woodpecker method).<br>
           <a class="go" href="https://lichess.org/training" target="_blank" rel="noopener">Puzzle history ↗</a></span></label>
         <label class="block t-ana"><input type="checkbox" class="chk" id="su2"><span class="time">35′</span>
-          <span class="txt"><b>Weekly review.</b> Skim all games in your archive, name your <b>“mistake of the week”</b> — next week's focus.<br>
+          <span class="txt"><b>Weekly review.</b> Skim all games in your archive, name your <b>"mistake of the week"</b> — next week's focus. Update your metrics (see Roadmap).<br>
           <a class="go" href="https://www.chess.com/games/archive" target="_blank" rel="noopener">Game archive ↗</a></span></label>
         <label class="block t-str"><input type="checkbox" class="chk" id="su3"><span class="time">30′</span>
           <span class="txt"><b>Watch & learn</b> — instructive video on this week's theme, or extra book reading.<br>
@@ -348,23 +351,6 @@
       </div>
     </div>
   </section>
-  <section id="journal">
-  <div class="sec-head"><div class="num">— THE JOURNAL</div>
-    <h2>Notes & Blunder Log</h2>
-    <p>Freeform space for blunders, takeaways, opening ideas — whatever the day calls for.
-       Saves automatically in this browser. Use <b>Export</b> to back up to a file.</p>
-  </div>
-  <div class="notes-wrap">
-    <textarea id="journalText" placeholder="Write here... e.g. 'Mon: hung a knight to a fork on move 14, missed Re8 check. Wed: tried QGD as Black, felt comfortable.'"></textarea>
-    <div class="notes-actions">
-      <button id="exportBtn">⬇ Export backup (.json)</button>
-      <label for="importFile">⬆ Import backup
-        <input type="file" id="importFile" accept="application/json" style="display:none">
-      </label>
-      <span class="notes-saved" id="savedMsg"></span>
-    </div>
-  </div>
-</section>
 
   <!-- ════ 02 OPENING LAB ════ -->
   <section id="openings">
@@ -379,7 +365,7 @@
         <h3><span>♕</span>White: Queen's Gambit</h3>
         <ul class="cl">
           <li><b>Core plans:</b> pressure d5, develop Nc3–Nf3–Bg5/Bf4–e3, castle short, rooks to c1/d1.</li>
-          <li><b>Learn the Carlsbad structure</b> (after cxd5 exd5): the minority attack b4–b5 is your first “real plan” — and Euwe's book explains exactly this kind of thinking.</li>
+          <li><b>Learn the Carlsbad structure</b> (after cxd5 exd5): the minority attack b4–b5 is your first "real plan" — and Euwe's book explains exactly this kind of thinking.</li>
           <li>vs <b>QGA (2…dxc4):</b> don't panic — e3/e4, Bxc4, you regain the pawn; watch out for …b5 tricks.</li>
           <li>vs <b>Slav (2…c6):</b> simple development, e3, consider Qb3 pressure on b7/d5.</li>
         </ul>
@@ -435,7 +421,7 @@
         <div class="cover cov-euwe">OCENA POZYCJI<br>I PLANOWANIE<br><br>M. EUWE</div>
         <div>
           <span class="tagline tg-b">Odd weeks · Thursday · 40′</span>
-          <h3>„Ocena pozycji i planowanie”</h3>
+          <h3>„Ocena pozycji i planowanie"</h3>
           <div class="auth">Max Euwe — World Champion 1935–37</div>
           <p><b>Your planning textbook.</b> One chapter/theme per session. Before reading Euwe's plan for a position,
              cover the text and <b>write your own plan first</b> — then compare. That gap is exactly what you're training.</p>
@@ -447,7 +433,7 @@
         <div class="cover cov-aag">AGRESYWNE<br>SZACHY<br><br>J. AAGAARD</div>
         <div>
           <span class="tagline tg-r">Even weeks · Thursday · 40′</span>
-          <h3>„Agresywne szachy”</h3>
+          <h3>„Agresywne szachy"</h3>
           <div class="auth">Jacob Aagaard — GM, master of attack</div>
           <p><b>Your ambition book.</b> Honest warning: Aagaard writes for stronger players, so go <b>slow</b> — half a chapter is a win.
              Treat every diagram as a puzzle: calculate your answer fully before reading his.</p>
@@ -493,7 +479,35 @@
           <li>Aagaard's attacking ideas in your Sicilians</li>
           <li>Classified weekend tournament — go hunting</li>
         </ul>
-        <div class="target">🎯 <b>~1400 chess.com</b> + attempt the <b>II kategoria norm</b> (1800 M / 1600 W)</div>
+        <div class="target">🎯 <b>~1400 chess.com</b> + attempt the <b>II kategoria norm</b> (1800 M / 1600 W)<br><span style="color:var(--muted);font-size:12px">Taper 2–3 days before the tournament — reduce volume, keep sharpness. Arrive fresh, not tired.</span></div>
+      </div>
+    </div>
+
+    <!-- progress metrics subsection -->
+    <div style="margin-top:44px">
+      <div class="sec-head"><div class="num">↗ TRACK IT</div>
+        <h2>Progress Metrics</h2>
+        <p>Rating alone lies. Track these monthly to see <b>where the gains are really coming from</b>.</p>
+      </div>
+      <div class="cols">
+        <div class="card">
+          <h3><span>📊</span>What to measure</h3>
+          <ul class="cl">
+            <li><b>Elo trend</b> — screenshot your rating graph on the 1st of every month.</li>
+            <li><b>Tactics accuracy %</b> — aim for &gt;80% on puzzles matched to your level (Chess.com puzzle rating ≈ game rating).</li>
+            <li><b>Blunders per game</b> — engine analysis of Saturday's classical. Target: below 1 critical error/game by week 8.</li>
+            <li><b>Endgame conversion</b> — log won / drawn / lost in your journal when you reach a theoretically won ending. Target: 80% converted by phase 2.</li>
+            <li><b>Opening depth</b> — how many moves before you're "out of book"? Should grow a move or two each month.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span>🗓</span>Review rhythm</h3>
+          <ul class="cl">
+            <li><b>Weekly (Sunday):</b> already built in — name your "mistake of the week" and log it.</li>
+            <li><b>Month-end:</b> compare Elo vs. 4 weeks ago. Run a 60-min tactics test (20 puzzles, full calculation — no peeking). Note improvement or stagnation.</li>
+            <li><b>Phase end (week 4 / 8 / 12):</b> reread the blunder journal. Still making the same mistake? That pattern becomes the following week's Monday motif.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -501,7 +515,7 @@
   <!-- ════ 05 RULES ════ -->
   <section id="rules">
     <div class="sec-head"><div class="num">05 — THE DISCIPLINE</div>
-      <h2>Grandmaster's 8 Rules</h2>
+      <h2>Grandmaster's 10 Rules</h2>
     </div>
     <div class="cols">
       <div class="card">
@@ -510,14 +524,16 @@
           <li><b>No bullet.</b> 15+10 or slower only (Sunday fun is the exception).</li>
           <li>Solve puzzles like real games — <b>calculate to the end</b> before touching a piece.</li>
           <li><b>Analyse every game you play.</b> Brain first, engine second.</li>
+          <li>Keep a <b>blunder journal</b>; reread it before each play session.</li>
         </ol>
       </div>
       <div class="card">
-        <ol class="rules" start="5">
-          <li>Keep a <b>blunder journal</b>; reread it before each play session.</li>
+        <ol class="rules" start="6">
           <li><b>Openings = your two weapons only.</b> Every game a QG or a Sicilian — repetition builds mastery.</li>
           <li><b>Ahead? Trade pieces. Behind? Complicate</b> (the Aagaard way).</li>
           <li><b>Consistency beats heroics</b> — tired? Take the rest day guilt-free.</li>
+          <li>After a tough loss or frustration: <b>walk away for 10 minutes</b> before the next game. Tilt erases training gains faster than anything.</li>
+          <li><b>Move your body 2–3× a week</b> — 20-min walk, jog, stretch. Physical stamina directly supports focus in long classical games.</li>
         </ol>
       </div>
       <div class="card pz">
@@ -556,6 +572,7 @@
       <a class="lnk" href="https://www.chess.com/puzzles/rated" target="_blank" rel="noopener"><div class="ic">🧩</div><div class="tt">chess.com Puzzles</div><div class="dd">Daily rated solving</div></a>
       <a class="lnk" href="https://lichess.org/practice" target="_blank" rel="noopener"><div class="ic">🏰</div><div class="tt">Lichess Practice</div><div class="dd">Endgame drills (Tuesdays)</div></a>
       <a class="lnk" href="https://www.chess.com/puzzles/rush" target="_blank" rel="noopener"><div class="ic">🔥</div><div class="tt">Puzzle Rush</div><div class="dd">Sunday fun block</div></a>
+      <a class="lnk" href="https://chesstempo.com/chess-problems" target="_blank" rel="noopener"><div class="ic">🎯</div><div class="tt">ChessTempo</div><div class="dd">Motif-sorted tactics, great stats</div></a>
     </div>
 
     <div class="gtitle">▸ Study</div>
@@ -563,7 +580,7 @@
       <a class="lnk" href="https://lichess.org/analysis" target="_blank" rel="noopener"><div class="ic">🔍</div><div class="tt">Analysis + Explorer</div><div class="dd">Opening phase reviews</div></a>
       <a class="lnk" href="https://www.chess.com/games" target="_blank" rel="noopener"><div class="ic">📜</div><div class="tt">Master Games DB</div><div class="dd">QG & Sicilian classics</div></a>
       <a class="lnk" href="https://lichess.org/study" target="_blank" rel="noopener"><div class="ic">📚</div><div class="tt">Lichess Studies</div><div class="dd">Free community courses</div></a>
-      <a class="lnk" href="https://www.chessable.com" target="_blank" rel="noopener"><div class="ic">🎓</div><div class="tt">Chessable</div><div class="dd">Free “Short & Sweet” courses</div></a>
+      <a class="lnk" href="https://www.chessable.com" target="_blank" rel="noopener"><div class="ic">🎓</div><div class="tt">Chessable</div><div class="dd">Free "Short & Sweet" courses</div></a>
     </div>
 
     <div class="gtitle">▸ Watch (Sunday)</div>
@@ -573,10 +590,29 @@
       <a class="lnk" href="https://www.youtube.com/@GothamChess" target="_blank" rel="noopener"><div class="ic">📣</div><div class="tt">GothamChess</div><div class="dd">Openings & game reviews</div></a>
     </div>
   </section>
+
+  <!-- ════ JOURNAL ════ -->
+  <section id="journal">
+    <div class="sec-head"><div class="num">07 — THE JOURNAL</div>
+      <h2>Notes & Blunder Log</h2>
+      <p>Freeform space for blunders, takeaways, opening ideas — whatever the day calls for.
+         Saves automatically in this browser. Use <b>Export</b> to back up to a file anytime.</p>
+    </div>
+    <div class="notes-wrap">
+      <textarea id="journalText" placeholder="Write here… e.g. 'Mon: hung a knight to a fork on move 14, missed Re8 check. Thu: Euwe ch.3 — minority attack plan finally clicked.'"></textarea>
+      <div class="notes-actions">
+        <button id="exportBtn">⬇ Export backup (.json)</button>
+        <label for="importFile">⬆ Import backup
+          <input type="file" id="importFile" accept="application/json" style="display:none">
+        </label>
+        <span class="notes-saved" id="savedMsg"></span>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <div class="q">“When you see a good move, look for a better one.”</div>
+  <div class="q">"When you see a good move, look for a better one."</div>
   <div class="a">— Emanuel Lasker · Queen's Gambit with the brain, Sicilian with the heart.</div>
 </footer>
 
@@ -592,51 +628,6 @@
     document.getElementById('pfill').style.width=(done.length/boxes.length*100)+'%';
     document.getElementById('ptext').textContent=`${done.length} / ${boxes.length}`;
   }
-  /* ── journal notes ── */
-const journal = document.getElementById('journalText');
-const savedMsg = document.getElementById('savedMsg');
-journal.value = localStorage.getItem('gmJournal') || '';
-let journalTimeout;
-journal.addEventListener('input', () => {
-  clearTimeout(journalTimeout);
-  savedMsg.textContent = '';
-  journalTimeout = setTimeout(() => {
-    localStorage.setItem('gmJournal', journal.value);
-    savedMsg.textContent = '✓ saved ' + new Date().toLocaleTimeString();
-  }, 500);
-});
-
-/* ── export / import everything ── */
-document.getElementById('exportBtn').onclick = () => {
-  const data = {
-    checkboxes: JSON.parse(localStorage.getItem(KEY) || '[]'),
-    journal: localStorage.getItem('gmJournal') || '',
-    exportedAt: new Date().toISOString()
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `chess-plan-backup-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-};
-
-document.getElementById('importFile').onchange = (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const data = JSON.parse(reader.result);
-      if (data.checkboxes) localStorage.setItem(KEY, JSON.stringify(data.checkboxes));
-      if (data.journal !== undefined) localStorage.setItem('gmJournal', data.journal);
-      alert('Backup restored! Reloading...');
-      location.reload();
-    } catch (err) {
-      alert('Invalid backup file.');
-    }
-  };
-  reader.readAsText(file);
-};
   document.getElementById('resetBtn').onclick=()=>{
     if(confirm('Start a fresh week? All checkmarks will be cleared.')){
       boxes.forEach(b=>b.checked=false); localStorage.removeItem(KEY); update();
@@ -672,6 +663,50 @@ document.getElementById('importFile').onchange = (e) => {
   };
   rBtn.onclick=()=>{ clearInterval(run); run=null; sBtn.textContent='▶'; left=sel.value*60; render(); };
   render(); update();
+
+  /* ── journal notes ── */
+  const journal=document.getElementById('journalText');
+  const savedMsg=document.getElementById('savedMsg');
+  journal.value=localStorage.getItem('gmJournal')||'';
+  let journalTimeout;
+  journal.addEventListener('input',()=>{
+    clearTimeout(journalTimeout);
+    savedMsg.textContent='';
+    journalTimeout=setTimeout(()=>{
+      localStorage.setItem('gmJournal',journal.value);
+      savedMsg.textContent='✓ saved '+new Date().toLocaleTimeString();
+    },500);
+  });
+
+  /* ── export / import everything ── */
+  document.getElementById('exportBtn').onclick=()=>{
+    const data={
+      checkboxes:JSON.parse(localStorage.getItem(KEY)||'[]'),
+      journal:localStorage.getItem('gmJournal')||'',
+      exportedAt:new Date().toISOString()
+    };
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`chess-plan-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+  };
+
+  document.getElementById('importFile').onchange=(e)=>{
+    const file=e.target.files[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      try{
+        const data=JSON.parse(reader.result);
+        if(data.checkboxes) localStorage.setItem(KEY,JSON.stringify(data.checkboxes));
+        if(data.journal!==undefined) localStorage.setItem('gmJournal',data.journal);
+        alert('Backup restored! Reloading...');
+        location.reload();
+      }catch(err){ alert('Invalid backup file.'); }
+    };
+    reader.readAsText(file);
+  };
 </script>
 </body>
 </html>
