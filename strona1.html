@@ -720,14 +720,20 @@
    ============================================================ */
 
 (function () {
-  // ── CONFIG ────────────────────────────────────────────────
-  const TUNNEL_URL  = "https://organizer-serves-mpeg-dim.trycloudflare.com";
-  const MODEL       = "qwen/qwen3.5-9b";
-  const API_KEY     = "lm-studio";      // LM Studio default; change if you set one
-  const REASONING   = "medium";         // off | low | medium | high
-  const CONTEXT_LEN = 8000;
-  const MCP_PLUGIN  = "mcp/serper-search"; // set "" to disable web search
-  // ─────────────────────────────────────────────────────────
+ // ── CONFIG ────────────────────────────────────────────────
+const TUNNEL_URL  = "https://organizer-serves-mpeg-dim.trycloudflare.com";
+const MODEL       = "qwen/qwen3.5-9b";
+
+// Replace this line:
+// const API_KEY  = "lm-studio"; 
+
+// With your newly generated token:
+const API_KEY     = "sk-lm-mckv4g0w:zoEdEPITwMXsvJQVpUZZ"; 
+
+const REASONING   = "medium";         
+const CONTEXT_LEN = 24000;
+const MCP_PLUGIN  = "mcp/serper-search"; 
+// ─────────────────────────────────────────────────────────
 
   /* ── STYLES ─────────────────────────────────────────────── */
   const CSS = `
